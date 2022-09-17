@@ -18,3 +18,7 @@ Allows Programming for the following scenarios (to name a few):
 - Version 2: Fix issues
 - Version 3: Format Uptime into Years/Months/Days/Hours/Minutes/Seconds
 - Version 4: Variables renamed to be user-friendly
+
+
+## Driver Available from Releases:
+https://github.com/Leighm0/Tesla-Home-Charger/releases
