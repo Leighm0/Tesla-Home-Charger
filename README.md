@@ -12,7 +12,7 @@ Allows Programming for the following scenarios (to name a few):
 - "Charging"
 - "Not Charging"
 
-#### Release Notes:
+### Release Notes:
 
 - Version 1: Initial Release
 - Version 2: Fix issues
