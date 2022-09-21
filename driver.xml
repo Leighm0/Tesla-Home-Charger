@@ -1,0 +1,326 @@
+<devicedata>
+	<copyright>Copyright 2022 Welton Cartel. All rights reserved.</copyright>
+	<creator>Welton Cartel</creator>
+	<name>Tesla Home Charger</name>
+	<model>Tesla Wall Connector (Gen 3)</model>
+	<manufacturer>Tesla</manufacturer>
+	<version>5</version>
+	<created>16/09/2022 12:00 AM</created>
+	<modified>21/09/2022 12:00 AM</modified>
+	<composer_categories>
+		<category>Power</category>
+	</composer_categories>
+	<small image_source="c4z">icons/device_sm.png</small>
+	<large image_source="c4z">icons/device_lg.png</large>
+	<control>lua_gen</control>
+	<proxies>
+		<proxy image_source="c4z" large_image="icons/device_lg.png" lgimagepath="icons/device_lg.png" name="Tesla Home Charger" proxybindingid="5001" small_image="icons/device_sm.png" smimagepath="icons/device_sm.png">tesla_home_charger</proxy>
+	</proxies>
+	<composer_categories/>
+	<driver>DriverWorks</driver>
+	<config>
+		<script file="driver.lua" />
+		<documentation file="www/documentation/index.html"/>
+		<properties>
+			<property>
+				<name>Driver Name</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Driver Version</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Debug Mode</name>
+				<type>LIST</type>
+				<items>
+					<item>Off</item>
+					<item>On</item>
+				</items>
+				<default>Off</default>
+				<readonly>false</readonly>
+			</property>
+			<property>
+				<name>Device IP</name>
+				<type>STRING</type>
+				<default/>
+			</property>
+			<property>
+				<name>Poll Interval (Seconds)</name>
+				<type>RANGED_INTEGER</type>
+				<minimum>30</minimum>
+				<maximum>86400</maximum>
+				<default>30</default>
+			</property>
+			<property>
+				<name>Device Information</name>
+				<type>LABEL</type>
+				<default>Device Information</default>
+			</property>
+			<property>
+				<name>Connection Status</name>
+				<type>STRING</type>
+				<default>OFFLINE</default>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Serial Number</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Firmware Version</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>MAC Address</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Internet Connected</name>
+				<type>STRING</type>
+				<default>false</default>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Session Stats</name>
+				<type>LABEL</type>
+				<default>Session Stats</default>
+			</property>
+			<property>
+				<name>Vehicle Charging</name>
+				<type>STRING</type>
+				<default>false</default>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Vehicle Connected</name>
+				<type>STRING</type>
+				<default>false</default>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Current Session Time</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Measured Grid Voltage (V)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Measured Grid Frequency (Hz)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Measured Vehicle Current (A)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Measured Current Phase 1 (A)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Measured Current Phase 2 (A)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Measured Current Phase 3 (A)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Measured Current Neutral (A)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Measured Voltage Phase 1 (V)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Measured Voltage Phase 2 (V)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Measured Voltage Phase 3 (V)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Relay Coil Voltage (V)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>PCBA Temp (C)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Handle Temp (C)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>MCU Temp (C)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Wall Charger Uptime</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Input Thermopile UV</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Prox (V)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Pilot Signal High Voltage (V)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Pilot Signal Low Voltage (V)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Delivered Session Energy (Wh)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Config Status</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Wall Charger State</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Current Alerts</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Lifetime Stats</name>
+				<type>LABEL</type>
+				<default>Lifetime Stats</default>
+			</property>
+			<property>
+				<name>Contactor Cycles</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Contactor Cycles Loaded</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Alert Count</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Thermal Foldbacks</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Average Startup Temp (C)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Number of Started Charges</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Total Energy Delivered (Wh)</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Connector Cycles</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Lifetime Uptime</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+			<property>
+				<name>Total Charging Time</name>
+				<type>STRING</type>
+				<default/>
+				<readonly>true</readonly>
+			</property>
+		</properties>
+		<commands />
+		<actions />
+	</config>
+	<connections />
+	<capabilities />
+</devicedata>
