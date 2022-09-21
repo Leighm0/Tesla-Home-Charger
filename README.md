@@ -1,3 +1,5 @@
+![Tesla_Logo](https://user-images.githubusercontent.com/69341431/191398693-86163dc7-13f6-41a9-a81b-7e1df958d90c.png)
+
 # Control4 Tesla Home Charger
 
 Control4 Driver to obtain details from Tesla Home Chargers and sets Variables to be used for Programming.
