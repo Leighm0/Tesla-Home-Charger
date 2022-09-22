@@ -91,18 +91,22 @@ function TESLA.STATUS(Status)
 			pollTimer = nil
 		end
 		if (reconnectTimer ~= nil) then
-			reconnectTimer = C4:KillTimer(reconnectTimer)
+			C4:KillTimer(reconnectTimer)
 			reconnectTimer = nil
 		end
-		reconnectTimer = C4:AddTimer(60, "SECONDS", true)
+		reconnectTimer = C4:AddTimer(60, "SECONDS", false)
 		if (TESLA.CONNECTION_STATUS ~= nil) then 
 			C4:UpdateProperty("Connection Status", tostring(TESLA.CONNECTION_STATUS))
 			C4:SetVariable("CONNECTION_STATUS", tostring(TESLA.CONNECTION_STATUS))
 		end
 	elseif (Status == 'ONLINE') then
-		if (pollTimer == nil) then pollTimer = C4:AddTimer(TESLA.POLL_INTERVAL,"SECONDS",true) end
+		if (pollTimer ~= nil) then
+			C4:KillTimer(pollTimer)
+			pollTimer = nil
+		end
+		pollTimer = C4:AddTimer(TESLA.POLL_INTERVAL, "SECONDS", false)
 		if (reconnectTimer ~= nil) then
-			reconnectTimer = C4:KillTimer(reconnectTimer)
+			C4:KillTimer(reconnectTimer)
 			reconnectTimer = nil
 		end
 		if (TESLA.CONNECTION_STATUS ~= nil) then 
@@ -522,8 +526,11 @@ function OPC.DeviceIP(propertyValue)
 	if (string.len(TESLA.IP) > 5) then
 		TESLA.POLL()
 		if(TESLA.POLL_INTERVAL ~= "0") then
-			if (pollTimer ~= nil) then pollTimer = C4:KillTimer(pollTimer) end
-			pollTimer = C4:AddTimer(TESLA.POLL_INTERVAL, "SECONDS", true)
+			if (pollTimer ~= nil) then
+				C4:KillTimer(pollTimer)
+				pollTimer = nil
+			end
+			pollTimer = C4:AddTimer(TESLA.POLL_INTERVAL, "SECONDS", false)
 		end
 	end
 end
@@ -532,8 +539,11 @@ function OPC.PollIntervalSeconds(propertyValue)
 	TESLA.POLL_INTERVAL = propertyValue
 	if (string.len(TESLA.IP) > 5) then
 		if(TESLA.POLL_INTERVAL ~= "0") then
-			if (pollTimer ~= nil) then pollTimer = C4:KillTimer(pollTimer) end
-			pollTimer = C4:AddTimer(TESLA.POLL_INTERVAL, "SECONDS", true)
+			if (pollTimer ~= nil) then
+				C4:KillTimer(pollTimer)
+				pollTimer = nil
+			end
+			pollTimer = C4:AddTimer(TESLA.POLL_INTERVAL, "SECONDS", false)
 		end
 	end
 end
@@ -548,8 +558,16 @@ end
 -------------------------------------------------------------------
 function OnTimerExpired(idTimer)
 	if (idTimer == pollTimer) then
+		if (pollTimer ~= nil) then
+			C4:KillTimer(pollTimer)
+			pollTimer = nil
+		end
 		TESLA.POLL()
 	elseif (idTimer == reconnectTimer) then
+		if (reconnectTimer ~= nil) then
+			C4:KillTimer(reconnectTimer)
+			reconnectTimer = nil
+		end
 		TESLA.POLL()
 	end
 end
@@ -630,10 +648,17 @@ function OnDriverLateInit()
 	C4:UpdateProperty("Driver Version", C4:GetDriverConfigInfo("version"))
 	if (Properties["Poll Interval (Seconds)"] ~= "0") then
 		TESLA.POLL_INTERVAL = Properties["Poll Interval (Seconds)"]
-		pollTimer = C4:AddTimer(TESLA.POLL_INTERVAL, "SECONDS", true)
+		if (pollTimer ~= nil) then
+			C4:KillTimer(pollTimer)
+			pollTimer = nil
+		end
+		pollTimer = C4:AddTimer(TESLA.POLL_INTERVAL, "SECONDS", false)
 	end
 	if (Properties["Device IP"] == '') then
-		if (pollTimer ~= nil) then pollTimer = C4:KillTimer(pollTimer) end
+		if (pollTimer ~= nil) then
+			C4:KillTimer(pollTimer)
+			pollTimer = nil
+		end
 	end
 end
 
@@ -643,8 +668,14 @@ end
 --Description   : Function called when driver deleted or updated
 -------------------------------------------------------------------
 function OnDriverDestroyed()
-	if (pollTimer ~= nil) then pollTimer = C4:KillTimer(pollTimer) end
-	if (reconnectTimer ~= nil) then reconnectTimer = C4:KillTimer(reconnectTimer) end
+	if (pollTimer ~= nil) then
+		C4:KillTimer(pollTimer)
+		pollTimer = nil
+	end
+	if (reconnectTimer ~= nil) then
+		C4:KillTimer(reconnectTimer)
+		reconnectTimer = nil
+	end
 	-- Connection Status
 	C4:DeleteVariable("CONNECTION_STATUS")
 	-- Session Vitals

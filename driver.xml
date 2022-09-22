@@ -4,9 +4,9 @@
 	<name>Tesla Home Charger</name>
 	<model>Tesla Wall Connector (Gen 3)</model>
 	<manufacturer>Tesla</manufacturer>
-	<version>5</version>
+	<version>6</version>
 	<created>16/09/2022 12:00 AM</created>
-	<modified>21/09/2022 12:00 AM</modified>
+	<modified>22/09/2022 12:00 AM</modified>
 	<composer_categories>
 		<category>Power</category>
 	</composer_categories>
